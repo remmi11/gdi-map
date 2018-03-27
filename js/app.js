@@ -23,7 +23,7 @@ var floods = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjf9riogz4z8n2rmk
 var map = L.map('map', {
     center: [35.058104, -101.749877],
     zoom: 9,
-    layers: [streets, sections, contours, prad, floods]
+    layers: [streets, sections] //, contours, prad, floods]
 });
 
 var measureControl = L.control.measure({
