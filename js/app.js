@@ -22,9 +22,22 @@ var prad = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjf75lnp62m612smws6
 var map = L.map('map', {
 center: [35.058104, -101.749877],
 zoom: 9,
-layers: [streets, sections, contours, prad],
-measureControl: true
+layers: [streets, sections, contours, prad]
+//measureControl: true
 });
+
+var measureControl = L.control.measure({
+    activeColor: '#ABE67E',
+    completedColor: '#C8F2BE',
+    // Change something about the popup via options
+    // Valid options.. http://leafletjs.com/reference.html#popup-options
+    popupOptions: {
+      maxWidth: 800,
+      closeButton: false,
+      className: 'leaflet-measure-resultpopup some-other-class' // Keep leaflet-measure-resultpopup to support default styling
+    }
+  });
+  measureControl.addTo(map);
 
 // var measureControl = new L.Control.Measure(options);
 // measureControl.addTo(myMap);
