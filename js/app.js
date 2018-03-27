@@ -28,14 +28,7 @@ layers: [streets, sections, contours, prad]
 
 var measureControl = L.control.measure({
     activeColor: '#ABE67E',
-    completedColor: '#C8F2BE',
-    // Change something about the popup via options
-    // Valid options.. http://leafletjs.com/reference.html#popup-options
-    popupOptions: {
-      maxWidth: 800,
-      closeButton: false,
-      className: 'leaflet-measure-resultpopup some-other-class' // Keep leaflet-measure-resultpopup to support default styling
-    }
+    completedColor: '#C8F2BE'
   });
   measureControl.addTo(map);
 
