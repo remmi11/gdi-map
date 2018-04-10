@@ -19,6 +19,7 @@ var sections = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjf442uso0z3e2s
 var contours = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjf6xjfak3ebb2sobig2fnpzh');
 var prad = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjf75lnp62m612smws69qnu4o');
 var floods = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjf9riogz4z8n2rmk4eawkc6o');
+var places = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjftuokfx8ime2sqpyhj88q67');
 
 var map = L.map('map', {
     center: [35.058104, -101.749877],
@@ -41,7 +42,8 @@ var overlays = {
     "Sections": sections,
     "10ft Contours": contours,
     "Prad Lines": prad,
-    "Flood Hazards": floods
+    "Flood Hazards": floods,
+    "City Limits": places
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
