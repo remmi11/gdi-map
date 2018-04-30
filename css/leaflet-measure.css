@@ -1,3 +1,12 @@
+.leaflet-touch .leaflet-control-measure .leaflet-control-measure-toggle {
+    /* background-size: 80%; */
+    margin-top: 7px;
+    margin-left: 7px;
+}
+
+/** End Custom**/
+
+
 .leaflet-control-measure h3,
 .leaflet-measure-resultpopup h3 {
     margin: 0 0 12px;
