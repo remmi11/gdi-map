@@ -20,15 +20,15 @@ def show_map(request):
     if geo_json['features']:
         for feature in geo_json['features']:
             if feature['properties']['status'] == 0:
-                feature['properties']['COLOR'] = "#ff0000"
+                feature['properties']['COLOR'] = "#777777"
             elif feature['properties']['status'] == 1:
-                feature['properties']['COLOR'] = "#00ff00"
+                feature['properties']['COLOR'] = "#ff9600"
             elif feature['properties']['status'] == 2:
-                feature['properties']['COLOR'] = "#0000ff"
+                feature['properties']['COLOR'] = "#21c579"
             elif feature['properties']['status'] == 3:
-                feature['properties']['COLOR'] = "#e81d1a"
+                feature['properties']['COLOR'] = "#7621c5"
             else:
-                feature['properties']['COLOR'] = "#46cf74"
+                feature['properties']['COLOR'] = "#c52148"
 
     geo_json = json.dumps(geo_json)
     return render(request, 'blog/map.html', {'geo_json': geo_json})
