@@ -1,0 +1,76 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+    <title>GDI - MAP</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+
+    <link rel="stylesheet" href="{% static 'plugins/leaflet-easyPrint/dist/easyPrint.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/leaflet-measure.css' %}">
+
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous"></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+
+</head>
+
+<body>
+
+    <nav id="top-nav" class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" style="color: white; font-weight: bold">GDI MAP</a>
+        {% if user.is_authenticated %}
+        <div class="pull-right" style="margin-right: 100px; color: white; font-size: 20px;">
+            Hi  
+            <div class="dropdown" style="display: inline;">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">{{ user.username }}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'update_profile' pk=user.pk%}">Update profile</a></li>
+                    {% if request.user.is_superuser %}
+                    <li><a href="{% url 'user_list' %}">Users</a></li>
+                    <li><a href="{% url 'user_new' %}">New User</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    <li><a href="/logout/"> Logout </a></li>
+                </ul>
+            </div>
+        </div>
+        {% else %} {% endif %}
+    </nav>
+
+    <div class="main container">
+        {% block content %} {% endblock %}
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'plugins/leaflet-easyPrint/dist/bundle.js' %}"></script>
+    <script src="{% static 'js/leaflet-measure.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script><script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#usertable').DataTable();
+        });
+    </script>
+</body>
+
+</html>

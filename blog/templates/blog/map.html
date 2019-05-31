@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %} {% block content %}
+<div id='map'></div>
+<script>
+	function subteStyle(feature) {
+	    return {
+	        "color": feature.properties.COLOR
+	    };
+	} 
+
+    $(document).ready(function () {
+        try{
+            var geo_json = '{{ geo_json }}';
+            geo_json = geo_json.replace(/&quot;/g, "\"").replace(/\\/g, "\\\\");
+            geo_json = JSON.parse(geo_json);
+
+            L.geoJSON(geo_json, {
+                style: subteStyle
+            }).addTo(map);
+        }catch(err){
+            console.log(err);
+        }
+    });
+</script>
+
+{% endblock %}

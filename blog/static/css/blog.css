@@ -1,0 +1,84 @@
+html,
+main {
+    font-family: 'Lobster';
+}
+/* #top-nav {
+    min-height: 50px;
+} */
+/* .navbar {
+    width: 100%;
+    font-size: 25px;
+    padding: 10px;
+} */
+
+/* .main {
+    padding: 50px;
+} */
+
+form {
+ padding-left: 30px;
+ padding-right: 30px;
+}
+
+
+.container { 
+max-width: 100%;
+margin: 3% auto;
+}
+
+ div.dataTables_wrapper {
+    max-width: 100%;
+    margin: 50 auto;
+}
+
+.nav-item {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 25px;
+}
+.nav-item a{
+color: #f1f1f1;
+}
+
+#top-nav > li {
+list-style-type:none !important;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.nav li:hover {
+    background-color: #666;
+    color: white;
+}
+
+#top-nav > ul > li.nav-item.active {
+    background-color: #666;
+    color: white;
+}
+
+.bg-dark {
+    background-color: #24c9a5 !important;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.dropdown-menu>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.dropdown-menu .divider {
+    height: 2px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}

@@ -1,0 +1,50 @@
+{% extends 'blog/base.html' %} {% block content %}
+<!-- <h1>New post</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form> -->
+<form method="POST" class="post-form">{% csrf_token %}
+	<div class="row">
+		<div class="col-md-6">
+            <p class="section-header">Login Info:</p>
+            <p>
+                <strong>Username:<span style="color: red;">*</span></strong>
+            </p>
+            {{ user_form.username }}
+            <p class="help-block">
+	            {{ user_form.username.errors }}
+	        </p>
+            <p>
+                <strong>Password:<span style="color: red;">*</span></strong>
+            </p>
+            {{ user_form.password }}
+            <p class="help-block">
+	            {{ user_form.password.errors }}
+	        </p>
+            <p>
+                <strong>Confirm Password:<span style="color: red;">*</span></strong>
+            </p>
+            {{ user_form.password2 }}
+            <p class="help-block">
+	            {{ user_form.password2.errors }}
+	        </p>
+        </div>
+        <div class="col-md-6">
+            <p class="section-header">User Info:</p>
+            <p>
+                <strong>Email:<span style="color: red;">*</span></strong>
+            </p>
+            {{ user_form.email }}
+            <p class="help-block">
+	            {{ user_form.email.errors }}
+	        </p>
+            <p>
+                <strong>Edit:</strong>
+            </p>
+            {{ user_form.edit_auth }}
+        </div>
+    </div>
+    <button class="btn btn-ext">Save</button>
+</form>
+{% endblock %}

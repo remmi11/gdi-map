@@ -1,0 +1,43 @@
+<!-- templates/registration/login.html -->
+
+
+{% extends 'blog/base.html' %} 
+{% load staticfiles %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% if form.errors %}
+    <p>
+        Your username and password didn't match.
+        <a href="{% url 'login' %}">Please try again.</a>
+    </p>
+{% else %}
+<form method="post" class="post-form container" style="margin-left: 30%;">
+  {% csrf_token %}
+  <div class="row">
+        <div class="col-md-offset-5 col-md-5">
+            <div class="form-login">
+            <h4>Welcome</h4>
+            {{ form.username }}
+            </br>
+            {{ form.password }}
+            </br>
+            <div class="wrapper">
+            <span class="group-btn">     
+                <button type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
+            </span>
+            </div>
+            </div>
+        
+        </div>
+    </div>
+</form>
+{%endif %}
+<script>
+    $(document).ready(function(){
+        $("#id_username").attr("class", "form-control")
+        $("#id_username").attr("placeholder", "Username")
+        $("#id_password").attr("class", "form-control")
+        $("#id_password").attr("placeholder", "Password")
+    });
+</script>
+{% endblock %}

@@ -1,1 +1,1 @@
-web: heroku-php-apache2
+web: gunicorn mysite.wsgi —-log-file -
