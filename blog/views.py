@@ -24,9 +24,9 @@ def show_map(request):
             elif feature['properties']['status'] == 1:
                 feature['properties']['COLOR'] = "#ff9600"
             elif feature['properties']['status'] == 2:
-                feature['properties']['COLOR'] = "#21c579"
+                feature['properties']['COLOR'] = "#fd05ae"
             elif feature['properties']['status'] == 3:
-                feature['properties']['COLOR'] = "#7621c5"
+                feature['properties']['COLOR'] = "#1077bd"
             else:
                 feature['properties']['COLOR'] = "#c52148"
 
