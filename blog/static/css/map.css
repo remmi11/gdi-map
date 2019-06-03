@@ -55,5 +55,6 @@ body {
     color: white;
     font-weight: 500;
     border-radius: 2px;
+    display: none;
 }
 
