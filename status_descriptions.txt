@@ -1,0 +1,5 @@
+code, description
+0, pending preliminary plan
+1, approved by preliminary plan (city)
+2, in-review
+3, filed

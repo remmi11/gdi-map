@@ -1,0 +1,28 @@
+<div id='legend' class='legend'>
+    <h2>Map Key</h2>
+    <button id="clickme">
+    Map Key!
+    </buttton>
+</div>
+
+dict = {
+    '#005493': 'Human - Blood',
+    '#0096FF': 'Human - Urine',
+    '#941100': 'Livestock - Blood',
+    '#FF7D78': 'Livestock - Urine',
+    '#FF9300': 'Food - Peanuts',
+    '#935100': 'Food - Cocoa',
+    '#EAEAEA': 'Food - Milk',
+    '#FFD478': 'Food - Wheat',
+    '#FEFC78': 'Food - Corn',
+    '#D783FF': 'Food - Other'
+}
+
+for (var key in dict) {
+    //   console.log( key, dict[key] )
+    // legend.insertAdjacentHTML('beforeend', '<div><span style="width:' + 15 + 'px;height:' + 15 + 'px;margin: 0 ' + [(20 - 15) / 2] + 'px;background-color:' + key + ';"></span><p>' + dict[key] + '</p><br></div>');
+    legend.insertAdjacentHTML('beforeend', '<div><span style="width:' + 15 + 'px;height:' + 15 + 'px;margin: 0' + 'px;background-color:' + key + ';"></span><p>' + dict[key] + '</p><br></div>');
+
+}
+legend.insertAdjacentHTML('beforeend', '<div><span style="width:' + 15 + 'px;height:' + 15 + 'px;margin: 0' + 'px;background-color: #ffffff; border: 2px solid red;"></span><br><p>' + 'Above Normal Range' + '</p><br></div>');
+// legend.insertAdjacentHTML('beforeend', '<div><span style="width:' + 15 + 'px;height:' + 15 + 'px;margin: 0 ' + [(20 - 15) / 2] + 'px;background-color: #ffffff; border: 2px solid red;"></span><br><p>' + 'Above Normal Range' + '</p><br></div>');

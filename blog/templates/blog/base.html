@@ -12,9 +12,9 @@
     <link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 
+    <link rel="stylesheet" href="{% static 'css/map.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
-
     <link rel="stylesheet" href="{% static 'plugins/leaflet-easyPrint/dist/easyPrint.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/leaflet-measure.css' %}">
@@ -63,7 +63,10 @@
 
     <script src="{% static 'plugins/leaflet-easyPrint/dist/bundle.js' %}"></script>
     <script src="{% static 'js/leaflet-measure.js' %}"></script>
-    <script src="{% static 'js/app.js' %}"></script><script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/test.js' %}"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <script>
         $(document).ready(function () {
