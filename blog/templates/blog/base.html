@@ -31,7 +31,7 @@
 <body>
 
     <nav id="top-nav" class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" style="color: white; font-weight: bold">GDI MAP</a>
+        <a class="navbar-brand" href="{% url 'show_map' %}" style="color: white; font-weight: bold">GDI MAP</a>
         {% if user.is_authenticated %}
         <div class="pull-right" style="margin-right: 100px; color: white; font-size: 20px;">
             Hi  
@@ -61,7 +61,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="{% static 'plugins/leaflet-easyPrint/dist/bundle.js' %}"></script>
     <script src="{% static 'js/leaflet-measure.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script><script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

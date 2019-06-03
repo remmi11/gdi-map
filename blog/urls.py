@@ -19,4 +19,6 @@ urlpatterns = [
     url(r'^user/new/$', views.user_new, name='user_new'),
     url(r'^user/(?P<pk>\d+)/edit/$', views.user_edit, name='user_edit'),
     url(r'^user/(?P<pk>\d+)/remove/$', views.user_remove, name='user_remove'),
+
+    url(r'^save-status/$', views.save_status, name='save_status'),
 ]

@@ -13,22 +13,19 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.db import connection
 
+COLOR = ["#777777", "#ff9600", "#fd05ae", "#1077bd"]
+DEFAULT_COLOR = "#c52148"
+
 @login_required
 def show_map(request):
     geo_json = getGeoSql()
 
     if geo_json['features']:
         for feature in geo_json['features']:
-            if feature['properties']['status'] == 0:
-                feature['properties']['COLOR'] = "#777777"
-            elif feature['properties']['status'] == 1:
-                feature['properties']['COLOR'] = "#ff9600"
-            elif feature['properties']['status'] == 2:
-                feature['properties']['COLOR'] = "#fd05ae"
-            elif feature['properties']['status'] == 3:
-                feature['properties']['COLOR'] = "#1077bd"
-            else:
-                feature['properties']['COLOR'] = "#c52148"
+            try:
+                feature['properties']['COLOR'] = COLOR[feature['properties']['status']]
+            except:
+                feature['properties']['COLOR'] = DEFAULT_COLOR
 
     geo_json = json.dumps(geo_json)
     return render(request, 'blog/map.html', {'geo_json': geo_json})
@@ -40,7 +37,7 @@ def getGeoSql():
             ST_AsGeoJSON(subs.wkb_geometry)::json As geometry, st_area(subs.wkb_geometry) as area,
             (
                 select row_to_json(t) 
-                from (select subs.status as status) t
+                from (select ogc_fid as id, subs.status as status) t
             )
         As properties
         FROM subs ) As f ) As fc;'''
@@ -150,3 +147,21 @@ class AuthenticationEmailBackend(object):
             return Users.objects.get(pk=user_id)
         except Users.DoesNotExist:
             return None
+
+@login_required
+@csrf_exempt
+def save_status(request):
+    sub = get_object_or_404(Subs, ogc_fid=request.POST.get('id'))
+    res = dict()
+    try:
+        status = int(request.POST.get('status'));
+        res['color'] = COLOR[status]
+        res["result"] = "OK"
+    except:
+        res["result"] = "ERROR"
+
+    if request.POST.get('status'):
+        sub.status = int(request.POST.get('status'))
+        sub.save();
+
+    return HttpResponse(json.dumps(res), content_type='application/json')
