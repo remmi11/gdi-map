@@ -52,12 +52,11 @@
                 data['properties']['status'] = parseInt($("#status").val());
                 data['properties']['COLOR'] = result['color']
                 geoJsonLayerGroup.removeLayer(layeresMap[parseInt($("#polygon-id").val())]);
-                
-                console.log(data)
+
                 geoJsonLayerGroup.addData(data);
             }
 
-            console.log("updated");
+            $( "#dialog" ).modal('hide');
         });
     }
 
