@@ -165,3 +165,30 @@ def save_status(request):
         sub.save();
 
     return HttpResponse(json.dumps(res), content_type='application/json')
+
+@login_required
+@csrf_exempt
+def save_bulk_status(request):
+    status = request.POST.get('status')
+    xmin = request.POST.get('xmin')
+    ymin = request.POST.get('ymin')
+    xmax = request.POST.get('xmax')
+    ymax = request.POST.get('ymax')
+
+    sql = "update subs set status=%s WHERE ST_intersects(ST_MakeEnvelope(%s, %s, %s, %s, 4326),subs.wkb_geometry);"
+    sql = sql % (status, xmin, ymin, xmax, ymax)
+
+    with connection.cursor() as cursor:
+       cursor.execute(sql)
+    
+    geo_json = getGeoSql()
+
+    if geo_json['features']:
+        for feature in geo_json['features']:
+            try:
+                feature['properties']['COLOR'] = COLOR[feature['properties']['status']]
+            except:
+                feature['properties']['COLOR'] = DEFAULT_COLOR
+
+    geo_json = json.dumps(geo_json)
+    return HttpResponse(json.dumps(geo_json), content_type='application/json')

@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^user/(?P<pk>\d+)/remove/$', views.user_remove, name='user_remove'),
 
     url(r'^save-status/$', views.save_status, name='save_status'),
+    url(r'^save-bulk-status/$', views.save_bulk_status, name='save_bulk_status'),
 ]

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+    <!-- leaflet draw -->
+    <link rel='stylesheet' href="{% static 'css/leaflet.draw.css' %}" />
 
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
@@ -63,6 +65,8 @@
 
     <script src="{% static 'plugins/leaflet-easyPrint/dist/bundle.js' %}"></script>
     <script src="{% static 'js/leaflet-measure.js' %}"></script>
+    <script src="{% static 'js/leaflet.draw.js' %}"></script> 
+
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/test.js' %}"></script>
 
@@ -73,6 +77,7 @@
             $('#usertable').DataTable();
         });
     </script>
+    {% block jsblock %} {% endblock %}
 </body>
 
 </html>

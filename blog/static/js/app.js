@@ -58,3 +58,22 @@ var printer = L.easyPrint({
 function manualPrint() {
     printer.printMap('CurrentSize', 'MyManualPrint')
 }
+
+// Initialise the FeatureGroup to store editable layers
+var drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
+// Initialise the draw control and pass it the FeatureGroup of editable layers
+var drawControl = new L.Control.Draw({
+    draw: {
+        polygon: false,
+        marker: false,
+        polyline: false,
+        circle: false
+    },
+    edit: {
+        featureGroup: drawnItems
+    }
+}).addTo(map);
+
+map.addControl(drawControl);
