@@ -19,6 +19,20 @@ var wmsLayer = L.tileLayer.wms('http://13.82.41.95:8080/geoserver/furmanrecords/
     layers: 'furmanrecords:section_lines_wgs84'
 });
 
+var layer = 'furmanrecords:section_lines_wgs84';
+var projection_epsg_no = '4326';
+var url = 'http://13.82.41.95:8080/geoserver/furmanrecords/wms/1.1.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
+
+//var mapboxUrl = "https://{s}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token={token}";
+
+var mapboxVectorTileOptions = {
+    rendererFactory: L.canvas.tile,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
+};
+
+var mapboxPbfLayer = L.vectorGrid.protobuf(url, mapboxVectorTileOptions);
+
+
 // styles
 var satellite = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v9');
 var sections = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjf442uso0z3e2ss1w8jpnyp5');
@@ -42,7 +56,7 @@ measureControl.addTo(map);
 var baseLayers = {
     "Streets": streets,
     "Satellite": satellite,
-    "Mapnik": wmsLayer
+    "Mapnik": mapboxPbfLayer
 };
 
 var overlays = {
