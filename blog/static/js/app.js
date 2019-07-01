@@ -33,7 +33,7 @@ var mapboxVectorTileOptions = {
 var mapboxPbfLayer = L.vectorGrid.protobuf(url, mapboxVectorTileOptions);
 
 L.control.layers({
-    OpenMapTiles: openmaptilesPbfLayer,
+    OpenMapTiles: OpenStreetMap_Mapnik,
     "MapBox Vector Tiles": mapboxPbfLayer
 }, {}, {collapsed: false}).addTo(map);
 
