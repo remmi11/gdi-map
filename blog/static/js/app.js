@@ -21,16 +21,23 @@ var wmsLayer = L.tileLayer.wms('http://13.82.41.95:8080/geoserver/furmanrecords/
 
 var layer = 'furmanrecords:section_lines_wgs84';
 var projection_epsg_no = '4326';
-var url = 'http://13.82.41.95:8080/geoserver/furmanrecords/wms/1.1.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
+//http://xxxx/geoserver/gwc/service/tms/1.0.0/GIS:LSOA@EPSG%3A900913@pbf/{z}/{x}/{-y}.pbf
+var url = 'http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
 
 //var mapboxUrl = "https://{s}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token={token}";
 
 var mapboxVectorTileOptions = {
-    rendererFactory: L.canvas.tile,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
 };
 
 var mapboxPbfLayer = L.vectorGrid.protobuf(url, mapboxVectorTileOptions);
+
+L.control.layers({
+    OpenMapTiles: openmaptilesPbfLayer,
+    "MapBox Vector Tiles": mapboxPbfLayer
+}, {}, {collapsed: false}).addTo(map);
+
+
 
 
 // styles
@@ -67,7 +74,7 @@ var overlays = {
     "City Limits": places
 };
 
-L.control.layers(baseLayers, overlays).addTo(map);
+//L.control.layers(baseLayers, overlays).addTo(map);
 
 var printer = L.easyPrint({
     sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
