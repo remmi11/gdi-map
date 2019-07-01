@@ -32,13 +32,6 @@ var mapboxVectorTileOptions = {
 
 var mapboxPbfLayer = L.vectorGrid.protobuf(url, mapboxVectorTileOptions);
 
-L.control.layers({
-    OpenMapTiles: OpenStreetMap_Mapnik,
-    "MapBox Vector Tiles": mapboxPbfLayer
-}, {}, {collapsed: false}).addTo(map);
-
-
-
 
 // styles
 var satellite = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v9');
@@ -75,6 +68,11 @@ var overlays = {
 };
 
 //L.control.layers(baseLayers, overlays).addTo(map);
+L.control.layers({
+    OpenMapTiles: OpenStreetMap_Mapnik,
+    "MapBox Vector Tiles": mapboxPbfLayer
+}, {}, {collapsed: false}).addTo(map);
+
 
 var printer = L.easyPrint({
     sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
