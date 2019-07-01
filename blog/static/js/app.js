@@ -22,7 +22,8 @@ var wmsLayer = L.tileLayer.wms('http://13.82.41.95:8080/geoserver/furmanrecords/
 var layer = 'furmanrecords:section_lines_wgs84';
 var projection_epsg_no = '4326';
 //"http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/furmanrecords%3Asection_lines_wgs84@EPSG%3A4326@png"
-var url = 'http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
+//var url = 'http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
+var url = '"http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/furmanrecords%3Asection_lines_wgs84@EPSG%3A4326@png'
 
 //var mapboxUrl = "https://{s}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token={token}";
 
@@ -70,7 +71,7 @@ var overlays = {
 //L.control.layers(baseLayers, overlays).addTo(map);
 L.control.layers({
     OpenMapTiles: OpenStreetMap_Mapnik,
-    "MapBox Vector Tiles": wmsLayer
+    "MapBox Vector Tiles": mapboxPbfLayer
 }, {}, {collapsed: false}).addTo(map);
 
 
