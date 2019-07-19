@@ -21,8 +21,9 @@ var wmsLayer = L.tileLayer.wms('http://13.82.41.95:8080/geoserver/furmanrecords/
 
 var layer = 'furmanrecords:section_lines_wgs84';
 var projection_epsg_no = '4326';
+var url = 'https://gs.furmanrecords.com/geoserver/gwc/demo/furmanrecords:section_lines_wgs84?gridSet=EPSG:4326&format=image/png';
 //"http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/furmanrecords%3Asection_lines_wgs84@EPSG%3A4326@png"
-var url = 'http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
+// var url = 'http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
 //var url = 'https://gs.furmanrecords.com/geoserver/gwc/service/tms/1.0.0/furmanrecords%3Asection_lines_wgs84@EPSG%3A4326@png'
 
 //var mapboxUrl = "https://{s}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token={token}";
