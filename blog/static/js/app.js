@@ -32,7 +32,7 @@ var mapboxVectorTileOptions = {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
 };
 
-var mapboxPbfLayer = L.vectorGrid.protobuf(url, mapboxVectorTileOptions);
+var sectionTilelayer = L.tileLayer(url, mapboxVectorTileOptions);
 
 
 // styles
@@ -58,23 +58,18 @@ measureControl.addTo(map);
 var baseLayers = {
     "Streets": streets,
     "Satellite": satellite,
-    "Mapnik": mapboxPbfLayer
 };
 
 var overlays = {
-    "Sections": sections,
+    //"Sections": sections,
     // "10ft Contours": contours,
     "Prad Lines": prad,
     "Flood Hazards": floods,
-    "City Limits": places
+    "City Limits": places,
+    "Sections": sectionTilelayer
 };
 
-//L.control.layers(baseLayers, overlays).addTo(map);
-L.control.layers({
-    OpenMapTiles: OpenStreetMap_Mapnik,
-    "MapBox Vector Tiles": mapboxPbfLayer
-}, {}, {collapsed: false}).addTo(map);
-
+L.control.layers(baseLayers, overlays).addTo(map);
 
 var printer = L.easyPrint({
     sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
