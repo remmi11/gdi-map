@@ -15,7 +15,7 @@ var grayscale = L.tileLayer(mbUrl, { id: 'mapbox.light', attribution: mbAttr }),
 var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
-var wmsLayer = L.tileLayer.wms('http://13.82.41.95:8080/geoserver/furmanrecords/wms?', {
+var wmsLayer = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
     layers: 'furmanrecords:section_lines_wgs84'
 });
 
@@ -46,7 +46,7 @@ var places = L.mapbox.styleLayer('mapbox://styles/wtgeographer/cjftuokfx8ime2sqp
 var map = L.map('map', {
     center: [35.058104, -101.749877],
     zoom: 9,
-    layers: [streets, sections] //, contours, prad, floods]
+    layers: [streets] //, contours, prad, floods]
 });
 
 var measureControl = L.control.measure({
@@ -66,7 +66,7 @@ var overlays = {
     "Prad Lines": prad,
     "Flood Hazards": floods,
     "City Limits": places,
-    "Sections": sectionTilelayer
+    "Sections": wmsLayer
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
