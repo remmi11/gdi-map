@@ -15,9 +15,12 @@ var grayscale = L.tileLayer(mbUrl, { id: 'mapbox.light', attribution: mbAttr }),
 var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
+
 var wmsLayer = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
-    layers: 'furmanrecords:section_lines_wgs84'
-});
+    layers: 'furmanrecords:section_lines_wgs84',
+    transparent: true,
+    format: 'image/png'
+}).addTo(map);
 
 var layer = 'furmanrecords:section_lines_wgs84';
 var projection_epsg_no = '4326';
