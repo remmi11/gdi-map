@@ -1,4 +1,3 @@
-
 L.mapbox.accessToken = 'pk.eyJ1Ijoid3RnZW9ncmFwaGVyIiwiYSI6ImNpdGFicWJqYjAwdzUydHM2M2g0MmhsYXAifQ.oO-MYNUC2tVeXa1xYbCIyw';
 
 // tiles
@@ -15,11 +14,15 @@ var grayscale = L.tileLayer(mbUrl, { id: 'mapbox.light', attribution: mbAttr }),
 var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
-// var wmsLayer = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
-//     layers: 'furmanrecords:section_lines_wgs84'
-// });
-var wmsLayer = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
+
+var sectionLines = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
     layers: 'furmanrecords:section_lines_wgs84',
+    transparent: true,
+    format: 'image/png'
+});
+
+var sectionLabels = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
+    layers: 'master_geom:section_labels',
     transparent: true,
     format: 'image/png'
 });
@@ -27,11 +30,6 @@ var wmsLayer = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrec
 var layer = 'furmanrecords:section_lines_wgs84';
 var projection_epsg_no = '4326';
 var url = 'https://gs.furmanrecords.com/geoserver/gwc/demo/furmanrecords:section_lines_wgs84?gridSet=EPSG:4326&format=image/png';
-//"http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/furmanrecords%3Asection_lines_wgs84@EPSG%3A4326@png"
-// var url = 'http://13.82.41.95:8080/geoserver/gwc/service/tms/1.0.0/' + layer + '@EPSG%3A' + projection_epsg_no + '@pbf/{z}/{x}/{-y}.pbf'
-//var url = 'https://gs.furmanrecords.com/geoserver/gwc/service/tms/1.0.0/furmanrecords%3Asection_lines_wgs84@EPSG%3A4326@png'
-
-//var mapboxUrl = "https://{s}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/{z}/{x}/{y}.vector.pbf?access_token={token}";
 
 var mapboxVectorTileOptions = {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
@@ -71,7 +69,8 @@ var overlays = {
     "Prad Lines": prad,
     "Flood Hazards": floods,
     "City Limits": places,
-    "Sections": wmsLayer
+    "Sections": sectionLines,
+    "Section Labels": sectionLabels
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
