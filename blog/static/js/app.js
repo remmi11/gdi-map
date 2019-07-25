@@ -16,16 +16,16 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 });
 
 var sectionLines = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
-    layers: 'furmanrecords:section_lines_wgs84',
+    layers: 'master_geom:sections_merged_4326',
     transparent: true,
     format: 'image/png'
 });
 
-var sectionLabels = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
-    layers: 'master_geom:section_labels',
-    transparent: true,
-    format: 'image/png'
-});
+// var sectionLabels = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
+//     layers: 'master_geom:section_labels',
+//     transparent: true,
+//     format: 'image/png'
+// });
 
 var layer = 'furmanrecords:section_lines_wgs84';
 var projection_epsg_no = '4326';
@@ -69,8 +69,8 @@ var overlays = {
     "Prad Lines": prad,
     "Flood Hazards": floods,
     "City Limits": places,
-    "Sections": sectionLines,
-    "Section Labels": sectionLabels
+    "Sections": sectionLines
+    //"Section Labels": sectionLabels
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
