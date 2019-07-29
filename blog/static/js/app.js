@@ -22,13 +22,14 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 // });
 
 var sections = 'https://gs.furmanrecords.com/geoserver/gwc/demo/master_geom:sections_merged_4326?gridSet=EPSG:4326&format=image/png';
-var url = 'https://gs.furmanrecords.com/geoserver/gwc/demo/furmanrecords:section_lines_wgs84?gridSet=EPSG:4326&format=image/png';
+var states = 'https://gs.furmanrecords.com/geoserver/gwc/demo/topp:states?gridSet=EPSG:4326&format=image/png';
+//https://gs.furmanrecords.com/geoserver/gwc/demo/furmanrecords:section_lines_wgs84?gridSet=EPSG:4326&format=image/png';
 
 var mapboxVectorTileOptions = {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
 };
 
-var sectionTilelayer = L.tileLayer(url);
+var sectionTilelayer = L.tileLayer(states);
 
 // styles
 var satellite = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v9');
