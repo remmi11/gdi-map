@@ -15,11 +15,11 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
-var sectionLines = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
-    layers: 'master_geom:sections_merged_4326',
-    transparent: true,
-    format: 'image/png'
-});
+// var sectionLines = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
+//     layers: 'master_geom:sections_merged_4326',
+//     transparent: true,
+//     format: 'image/png'
+// });
 
 var sections = 'https://gs.furmanrecords.com/geoserver/gwc/demo/master_geom:sections_merged_4326?gridSet=EPSG:4326&format=image/png';
 var url = 'https://gs.furmanrecords.com/geoserver/gwc/demo/furmanrecords:section_lines_wgs84?gridSet=EPSG:4326&format=image/png';
@@ -28,7 +28,7 @@ var mapboxVectorTileOptions = {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
 };
 
-var sectionTilelayer = L.tileLayer(sections, mapboxVectorTileOptions);
+var sectionTilelayer = L.tileLayer(sections);
 
 
 // styles
