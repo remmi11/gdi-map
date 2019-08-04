@@ -1,4 +1,11 @@
-{% extends 'blog/base.html' %} {% block content %}
+{% extends 'blog/base.html' %} 
+{% load staticfiles %}
+{% block content %}
+<div class="loader">
+   <center>
+       <img class="loading-image" src="{% static 'loading.gif' %}" alt="loading..">
+   </center>
+</div>
 <div id='map'>
     <div id='legend' class='legend'>
         <h2>Map Key</h2>
@@ -18,6 +25,7 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="polygon-id" name="polygon_id">
+                <input type="hidden" id="sel-type" name="type">
                 <table class="table table-striped table-bordered table-condensed">
                     <tr>
                         <td>Status</td>
@@ -36,10 +44,36 @@
     </div>
 </div>
 
+<style type="text/css">
+    .loading-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 10;
+    }
+    .loader
+    {
+        display: none;
+        width:200px;
+        height: 200px;
+        position: fixed;
+        top: 50%;
+        left: 45%;
+        text-align:center;
+        margin-left: -50px;
+        margin-top: -100px;
+        z-index:2;
+        overflow: auto;
+    }
+</style>
+{% endblock %}
+
+{% block jsblock %}
 <script>
     var featuresMap = {};
     var layeresMap = {};
     var geoJsonLayerGroup;
+    var area = [];
 
     function subteStyle(feature) {
         return {
@@ -48,25 +82,60 @@
     }
 
     function saveStatus() {
-        $.ajax({
-            method: "post",
-            url: '{% url "save_status" %}',
-            data: { 'status': $("#status").val(), 'id': $("#polygon-id").val() }
-        }).done(function (result) {
-            var data = featuresMap[parseInt($("#polygon-id").val())];
-            if (result['result'] == "OK") {
-                data['properties']['status'] = parseInt($("#status").val());
-                data['properties']['COLOR'] = result['color']
-                geoJsonLayerGroup.removeLayer(layeresMap[parseInt($("#polygon-id").val())]);
+        console.log($("#sel-type").val())
 
-                geoJsonLayerGroup.addData(data);
-            }
+        if ($("#sel-type").val() == "single") {
+            $(".loader").show();
+            $.ajax({
+                method: "post",
+                url: '{% url "save_status" %}',
+                data: { 'status': $("#status").val(), 'id': $("#polygon-id").val() }
+            }).done(function (result) {
+                var data = featuresMap[parseInt($("#polygon-id").val())];
+                if (result['result'] == "OK") {
+                    data['properties']['status'] = parseInt($("#status").val());
+                    data['properties']['COLOR'] = result['color']
+                    geoJsonLayerGroup.removeLayer(layeresMap[parseInt($("#polygon-id").val())]);
 
-            $("#dialog").modal('hide');
-        });
+                    geoJsonLayerGroup.addData(data);
+                }
+
+                $("#dialog").modal('hide');
+                $(".loader").hide();
+            });
+        } else {
+            $(".loader").show();
+            $.ajax({
+                method: "post",
+                url: '{% url "save_bulk_status" %}',
+                data: { 'status': $("#status").val(), 
+                    'xmin': area[0], 'ymin': area[1],
+                    'xmax': area[2], 'ymax': area[3] }
+            }).done(function (result) {
+                map.eachLayer( function(layer) {
+                    if ( layer.myTag &&  layer.myTag === "myGeoJSON") {
+                        map.removeLayer(layer);
+                    }
+                });
+
+
+                geo_json = JSON.parse(result);
+
+                geoJsonLayerGroup = L.geoJSON(geo_json, {
+                    style: subteStyle,
+                    onEachFeature: onEachFeature
+                }); //.addTo(map);
+
+                layeresMap = {};
+                featuresMap = {};
+                $("#dialog").modal('hide');
+                $(".loader").hide();
+            });
+        }
     }
 
     function onEachFeature(feature, layer) {
+        layer.myTag = "myGeoJSON";
         layer.on('click', function (e) {
             $("#dialog").modal('show');
             var selector = "";
@@ -79,11 +148,37 @@
             }
             $("#status").html(selector);
             $("#polygon-id").val(feature['properties']['id']);
+            $("#sel-type").val("single");
 
             layeresMap[feature['properties']['id']] = layer;
             featuresMap[feature['properties']['id']] = feature;
         });
     }
+
+    map.on('draw:created', function (e) {
+        // when a feature is created
+        // query parcels within using postgis within from bbox
+        // change color of within parcels to cyan
+        // open popup to bulk update status
+        var xmin = 1000, ymin = 1000, xmax = -1000, ymax = -1000;
+        $.each(e.layer.getLatLngs()[0], function(index, item){
+            if (xmin > item['lng']) xmin = item['lng'];
+            if (ymin > item['lat']) ymin = item['lat'];
+            if (xmax < item['lng']) xmax = item['lng'];
+            if (ymax < item['lat']) ymax = item['lat'];
+        });
+        area = [xmin, ymin, xmax, ymax];
+
+        var selector = "";
+        for (i = 0; i < 4; i++) {
+            selector += "<option value=" + i.toString() + ">" + i.toString() + "</option>";
+        }
+        $("#status").html(selector);
+        $("#dialog").modal('show');
+        $("#sel-type").val("multiple");
+        // add drawn items to map
+        drawnItems.addLayer(e.layer);
+    });
 
     $(document).ready(function () {
         try {
@@ -94,7 +189,7 @@
             geoJsonLayerGroup = L.geoJSON(geo_json, {
                 style: subteStyle,
                 onEachFeature: onEachFeature
-            }).addTo(map);
+            });//.addTo(map);
 
             layeresMap = {};
             featuresMap = {};

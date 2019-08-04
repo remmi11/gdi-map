@@ -12,6 +12,10 @@
     <link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 
+
+    <!-- leaflet draw -->
+    <link rel='stylesheet' href="{% static 'css/leaflet.draw.css' %}" />
+
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
@@ -26,6 +30,10 @@
         crossorigin="anonymous"></script>
     <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
 
+    <!-- leaflet vector tiles plugin -->
+    <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js" integrity="sha256-k1l+ouvMXT+0iRA8pc8e0dge4ZeGjXG6imrvWboFTRE=" crossorigin="anonymous"></script>
+    
 </head>
 
 <body>
@@ -63,6 +71,8 @@
 
     <script src="{% static 'plugins/leaflet-easyPrint/dist/bundle.js' %}"></script>
     <script src="{% static 'js/leaflet-measure.js' %}"></script>
+    <script src="{% static 'js/leaflet.draw.js' %}"></script> 
+
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/test.js' %}"></script>
 
@@ -73,6 +83,7 @@
             $('#usertable').DataTable();
         });
     </script>
+    {% block jsblock %} {% endblock %}
 </body>
 
 </html>
