@@ -1,3 +1,5 @@
 *.gdb 
 data/
 myvenv/
+.vscode
+_pycache_
