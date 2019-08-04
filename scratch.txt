@@ -2,3 +2,6 @@ python3 -m venv myvenv
 myvenv\Scripts\activate
 pip3 install -r requirements.txt
 python3 manage.py runserver
+
+# using geowebcache in leaflet
+https://leafletjs.com/examples/wms/wms.html#tms-in-leaflet

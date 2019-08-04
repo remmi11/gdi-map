@@ -10,24 +10,8 @@ var grayscale = L.tileLayer(mbUrl, { id: 'mapbox.light', attribution: mbAttr }),
     streets = L.tileLayer(mbUrl, { id: 'mapbox.streets', attribution: mbAttr })
 
 
-    //http://13.82.41.95:8080/geoserver/furmanrecords/wms?service=WMS&version=1.1.0&request=GetMap&layers=furmanrecords%3Asection_lines_wgs84&bbox=-105.388671875%2C31.6156005859375%2C-98.3876876831055%2C38.736743927002&width=755&height=768&srs=EPSG%3A4326&format=image%2Fpng
-var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
-
-// var sectionLines = L.tileLayer.wms('https://gs.furmanrecords.com/geoserver/furmanrecords/wms?', {
-//     layers: 'master_geom:sections_merged_4326',
-//     transparent: true,
-//     format: 'image/png'
-// });
-
-var sections = 'https://gs.furmanrecords.com/geoserver/gwc/demo/master_geom:sections_merged_4326?gridSet=EPSG:4326&format=image/png';
-
-var mapboxVectorTileOptions = {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
-};
-
-var sectionTilelayer = new L.TileLayer(sections);
+var sectionsTileLayer = 'https://gs.furmanrecords.com:443/geoserver/gwc/service/tms/1.0.0/master_geom%3Asections_merged_4326@EPSG%3A900913@png/{z}/{x}/{-y}.png';
+var sections=L.tileLayer(sectionsTileLayer);
 
 // styles
 var satellite = L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-streets-v9');
@@ -59,7 +43,7 @@ var overlays = {
     "Prad Lines": prad,
     "Flood Hazards": floods,
     "City Limits": places,
-    "Sections": sectionTilelayer
+    "Sections": sections
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
