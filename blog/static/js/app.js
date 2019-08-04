@@ -22,8 +22,6 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 // });
 
 var sections = 'https://gs.furmanrecords.com/geoserver/gwc/demo/master_geom:sections_merged_4326?gridSet=EPSG:4326&format=image/png';
-var states = 'https://gs.furmanrecords.com/geoserver/gwc/demo/topp:states?gridSet=EPSG:4326&format=image/png';
-//https://gs.furmanrecords.com/geoserver/gwc/demo/furmanrecords:section_lines_wgs84?gridSet=EPSG:4326&format=image/png';
 
 var mapboxVectorTileOptions = {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a>'
@@ -57,13 +55,11 @@ var baseLayers = {
 };
 
 var overlays = {
-    //"Sections": sections,
     // "10ft Contours": contours,
     "Prad Lines": prad,
     "Flood Hazards": floods,
     "City Limits": places,
-    "Sections": sectionTilelayer
-    //"Section Labels": sectionLabels
+    "Sections": sections
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
